@@ -1,7 +1,7 @@
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 public class Percolation {
-    private int gridSize;
+    private final int gridSize;
     private int openSites;
     private WeightedQuickUnionUF unionFind;
 
@@ -42,7 +42,7 @@ public class Percolation {
     }
 
     public boolean percolates() {
-        return unionFind.connected(0, gridSize ^ 2 + 1);
+        return unionFind.connected(0, gridSize * gridSize + 1);
     }
 
     private void checkInBound(int row, int col) {
@@ -66,19 +66,15 @@ public class Percolation {
                 unionFind.union(getGridId(row + 1, col), getGridId(row, col));
             }
         } else {
-            unionFind.union(gridSize ^ 2 + 1, getGridId(row, col));
+            unionFind.union(gridSize * gridSize + 1, getGridId(row, col));
         }
         //left
-        if (col > 1) {
-            if (isOpen(row, col - 1)) {
-                unionFind.union(getGridId(row, col - 1), getGridId(row, col));
-            }
+        if (col > 1 && isOpen(row, col - 1)) {
+            unionFind.union(getGridId(row, col - 1), getGridId(row, col));
         }
         //right
-        if (col < gridSize) {
-            if (isOpen(row, col + 1)) {
-                unionFind.union(getGridId(row, col + 1), getGridId(row, col));
-            }
+        if (col < gridSize && isOpen(row, col + 1)) {
+            unionFind.union(getGridId(row, col + 1), getGridId(row, col));
         }
     }
 
