@@ -84,11 +84,9 @@ public class Percolation {
 
     public static void main(String[] args) {
         Percolation percolation = new Percolation(5);
-        percolation.open(1, 5);
-        percolation.open(2, 5);
-        percolation.open(3, 5);
-        percolation.open(4, 5);
-        percolation.open(5, 5);
+        percolation.open(1, 1);
+        percolation.open(1, 2);
+        System.out.println(percolation.unionFind.connected(1,2));
         System.out.println(percolation.numberOfOpenSites());
         System.out.println(percolation.percolates());
         System.out.println(percolation.isFull(3, 5));
